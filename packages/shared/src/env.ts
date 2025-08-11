@@ -50,6 +50,10 @@ const EnvSchema = z.object({
     .nonnegative()
     .default(15_000),
   LANGFUSE_INGESTION_QUEUE_SHARD_COUNT: z.coerce.number().positive().default(1),
+  LANGFUSE_TRACE_UPSERT_QUEUE_SHARD_COUNT: z.coerce
+    .number()
+    .positive()
+    .default(1),
   LANGFUSE_TRACE_DELETE_DELAY_MS: z.coerce
     .number()
     .nonnegative()
@@ -186,10 +190,10 @@ const EnvSchema = z.object({
         return new Map<string, number>();
       }
     }),
-
   SLACK_CLIENT_ID: z.string().optional(),
   SLACK_CLIENT_SECRET: z.string().optional(),
   SLACK_STATE_SECRET: z.string().optional(),
+  HTTPS_PROXY: z.string().optional(),
 
   LANGFUSE_SERVER_SIDE_IO_CHAR_LIMIT: z.coerce
     .number()
